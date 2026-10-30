@@ -26,6 +26,7 @@ Web de ejemplo de una página para enseñar a posibles clientes. Es la demo 1 de
 - `styles.css`: aspecto. `grid` en portada, primera visita y contacto; `flex` en cabecera y barra del móvil.
 - `script.js`: mapa del cuerpo y formulario.
 - `favicon.svg`: icono de la pestaña.
+- `vista-previa.png`: imagen de 1200 × 630 px que sale al compartir el enlace, sin marcadores EDITA AQUÍ a la vista. Si cambia la portada, hay que rehacerla.
 
 ## Cómo probarla
 

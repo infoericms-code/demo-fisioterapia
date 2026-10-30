@@ -242,6 +242,7 @@ a {
    ========================================================== */
 .mapa {
   grid-area: mapa;
+  align-self: start; /* si se estira con la fila, los botones se separan de sus líneas */
   position: relative;
   width: 100%;
   max-width: 34rem;
