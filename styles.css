@@ -1,0 +1,751 @@
+/* ==========================================================
+   Variables: los colores y medidas de toda la web.
+   Si cambias un valor aquí, cambia en todas partes.
+   ========================================================== */
+:root {
+  --papel: #F3F6F4;
+  --blanco: #FFFFFF;
+  --tinta: #17263A;
+  --cinta-azul: #1E46C8;
+  --cinta-rosa: #E8487A; /* solo en el muñeco, nunca en texto */
+  --gris: #C9D3D1;
+  --gris-oscuro: #AEBCBA;
+  --rotulador: #FFE45C; /* solo en los marcadores EDITA AQUÍ */
+  --margen: clamp(1rem, 4vw, 2.5rem);
+  --espacio-bloque: clamp(3.5rem, 8vw, 6rem);
+  color-scheme: light;
+}
+
+/* ==========================================================
+   Base
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* Deja sitio para que la barra del móvil no tape lo que se muestra al saltar */
+  scroll-padding-bottom: 5.5rem;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: "Atkinson Hyperlegible Next", system-ui, sans-serif;
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  line-height: 1.1;
+  font-weight: 800;
+}
+
+h1 {
+  font-size: clamp(3.4rem, 8.5vw, 6.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+p {
+  margin: 0;
+  max-width: 60ch;
+}
+
+a {
+  color: var(--cinta-azul);
+}
+
+:focus-visible {
+  outline: 3px solid var(--cinta-azul);
+  outline-offset: 2px;
+}
+
+.contenedor {
+  width: 100%;
+  max-width: 74rem;
+  margin-inline: auto;
+  padding-inline: var(--margen);
+}
+
+/* Marcador de dato pendiente: tiene que verse de lejos */
+.edita {
+  background: var(--rotulador);
+  color: var(--tinta);
+  padding: 0.05em 0.35em;
+  font-weight: 700;
+}
+
+.saltar {
+  position: absolute;
+  left: var(--margen);
+  top: -4rem;
+  z-index: 20;
+  padding: 0.5rem 1rem;
+  background: var(--tinta);
+  color: var(--blanco);
+}
+
+.saltar:focus {
+  top: 0.5rem;
+}
+
+.boton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0.5rem 1.25rem;
+  border: 2px solid var(--cinta-azul);
+  border-radius: 4px;
+  background: var(--cinta-azul);
+  color: var(--blanco);
+  font: inherit;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.boton:hover {
+  background: var(--tinta);
+  border-color: var(--tinta);
+}
+
+.boton:disabled {
+  background: var(--gris);
+  border-color: var(--gris);
+  color: var(--tinta);
+  cursor: not-allowed;
+}
+
+.boton-claro {
+  background: var(--blanco);
+  color: var(--cinta-azul);
+}
+
+.boton-claro:hover {
+  color: var(--blanco);
+}
+
+/* ==========================================================
+   Aviso y cabecera. FLEX: pone los elementos en fila
+   y justify-content los separa a cada extremo.
+   ========================================================== */
+.aviso {
+  max-width: none;
+  /* max() alinea el texto con el resto de la página en pantallas anchas */
+  padding: 0.4rem max(var(--margen), calc((100% - 74rem) / 2 + var(--margen)));
+  background: var(--gris);
+  font-size: 0.95rem;
+  line-height: 1.35;
+}
+
+.cabecera {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1rem;
+}
+
+.marca {
+  color: var(--tinta);
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.cabecera-acciones {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* En móvil el teléfono ya está en la barra de abajo */
+.cabecera-tel {
+  display: none;
+}
+
+/* ==========================================================
+   Portada. GRID: en móvil, una sola columna.
+   En pantallas anchas, dos columnas (ver más abajo).
+   ========================================================== */
+.portada {
+  display: grid;
+  gap: 1.75rem;
+  grid-template-areas:
+    "titulo"
+    "mapa"
+    "texto";
+  padding-block: 1.5rem 0;
+}
+
+.portada-titulo {
+  grid-area: titulo;
+}
+
+.entrada {
+  margin-top: 1.25rem;
+  font-size: 1.25rem;
+  line-height: 1.45;
+}
+
+.portada-texto {
+  grid-area: texto;
+}
+
+.zona h2 {
+  font-size: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Sin JavaScript se ven todas las zonas en lista */
+.zona + .zona {
+  margin-top: 1.25rem;
+}
+
+.js .zona:not(.activa) {
+  display: none;
+}
+
+.js .zona + .zona {
+  margin-top: 0;
+}
+
+.nota {
+  margin-block: 1rem 1.25rem;
+  font-size: 1rem;
+}
+
+/* ==========================================================
+   Mapa del cuerpo: los botones se colocan encima del dibujo
+   con position: absolute y porcentajes, así que siguen en su
+   sitio aunque el dibujo cambie de tamaño.
+   ========================================================== */
+.mapa {
+  grid-area: mapa;
+  position: relative;
+  width: 100%;
+  max-width: 34rem;
+  margin-inline: auto;
+}
+
+/* Tira blanca detrás del muñeco: el rollo de papel de la camilla */
+.mapa::before {
+  content: "";
+  position: absolute;
+  inset: 0 22%;
+  background: var(--blanco);
+}
+
+.muneco {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pieza {
+  fill: var(--gris);
+}
+
+.hueso {
+  stroke: var(--gris);
+  stroke-linecap: round;
+}
+
+.articulacion {
+  fill: var(--gris-oscuro);
+}
+
+.guia path {
+  stroke: var(--tinta);
+  stroke-width: 1.5;
+  fill: none;
+}
+
+.guia circle {
+  fill: var(--tinta);
+}
+
+/* La cinta se «pega»: la línea se dibuja de un extremo a otro */
+.cinta path {
+  fill: none;
+  stroke: var(--cinta-rosa);
+  stroke-width: 10;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0.45s ease-out;
+}
+
+.cinta.activa path {
+  stroke-dashoffset: 0;
+}
+
+.zona-boton {
+  position: absolute;
+  min-height: 44px;
+  max-width: 7.5em;
+  padding: 0.25rem 0.6rem;
+  transform: translateY(-50%);
+  border: 2px solid var(--tinta);
+  border-radius: 4px;
+  background: var(--papel);
+  color: var(--tinta);
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.15;
+  text-align: left;
+  cursor: pointer;
+}
+
+.zona-boton:hover {
+  background: var(--blanco);
+}
+
+.zona-boton[aria-pressed="true"] {
+  border-color: var(--cinta-azul);
+  background: var(--cinta-azul);
+  color: var(--blanco);
+}
+
+/* La altura de cada botón coincide con la de su línea guía (y / 600) */
+.z-cuello  { right: 0; top: 16.7%; }
+.z-hombro  { left: 0;  top: 24.3%; }
+.z-espalda { right: 0; top: 41.7%; }
+.z-rodilla { left: 0;  top: 78.3%; }
+.z-tobillo { right: 0; top: 94.3%; }
+.z-duda    { left: 0;  top: 94.3%; }
+
+/* En móvil, en dos líneas para no tapar el brazo */
+@media (max-width: 599px) {
+  .z-espalda { max-width: 5em; }
+}
+
+/* ==========================================================
+   Bloques de contenido
+   ========================================================== */
+.bloque {
+  padding-block: var(--espacio-bloque) 0;
+}
+
+.bloque > h2 {
+  margin-bottom: 1.5rem;
+}
+
+/* Tarifas. GRID en cada fila: texto, tiempo y precio */
+.tarifas {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 2px solid var(--tinta);
+}
+
+.tarifas li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  column-gap: 1.5rem;
+  padding-block: 1.1rem;
+  border-bottom: 1px solid var(--gris-oscuro);
+}
+
+.tarifas li > div {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.tarifa-precio {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+
+.tarifa-tiempo {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  font-size: 1rem;
+}
+
+/* Primera visita: un contador de CSS pone los números 1, 2 y 3 */
+.pasos {
+  display: grid;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: paso;
+}
+
+.pasos li {
+  counter-increment: paso;
+  padding-top: 0.75rem;
+  border-top: 6px solid var(--cinta-azul);
+}
+
+.pasos li::before {
+  content: counter(paso);
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--cinta-azul);
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.pasos h3 {
+  margin-bottom: 0.4rem;
+}
+
+/* Huecos de foto y mapa */
+.hueco {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border: 2px dashed currentColor;
+  text-align: center;
+}
+
+.hueco-foto {
+  aspect-ratio: 4 / 3;
+}
+
+.hueco-mapa {
+  min-height: 14rem;
+  margin-top: 1.75rem;
+}
+
+.persona {
+  display: grid;
+  gap: 1.75rem;
+}
+
+/* En móvil, primero el título y luego la foto */
+.persona .hueco-foto {
+  order: 1;
+}
+
+.persona h2 {
+  margin-bottom: 1rem;
+}
+
+.persona p + p {
+  margin-top: 0.75rem;
+}
+
+/* Preguntas frecuentes */
+.preguntas {
+  max-width: 48rem;
+  border-top: 2px solid var(--tinta);
+}
+
+.preguntas details {
+  border-bottom: 1px solid var(--gris-oscuro);
+}
+
+.preguntas summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  min-height: 3.25rem;
+  padding-block: 0.6rem;
+  font-weight: 700;
+  cursor: pointer;
+  list-style: none;
+}
+
+.preguntas summary::-webkit-details-marker {
+  display: none;
+}
+
+.preguntas summary::after {
+  content: "+";
+  flex: none;
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.preguntas details[open] summary::after {
+  content: "−";
+}
+
+.preguntas details p {
+  padding-bottom: 1rem;
+}
+
+/* ==========================================================
+   Contacto: bloque oscuro porque es el objetivo de la página
+   ========================================================== */
+.contacto {
+  margin-top: var(--espacio-bloque);
+  padding-block: var(--espacio-bloque);
+  background: var(--tinta);
+  color: var(--blanco);
+}
+
+.contacto :focus-visible {
+  outline-color: var(--blanco);
+}
+
+.contacto-rejilla {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.contacto-datos h2 {
+  margin-bottom: 1rem;
+}
+
+.contacto-datos dl {
+  margin: 1.75rem 0 0;
+}
+
+.contacto-datos dt {
+  margin-top: 1rem;
+  font-weight: 700;
+}
+
+.contacto-datos dd {
+  margin: 0.15rem 0 0;
+}
+
+.contacto-datos a {
+  color: var(--blanco);
+}
+
+.formulario {
+  align-self: start;
+  padding: clamp(1.25rem, 3vw, 2rem);
+  background: var(--papel);
+  color: var(--tinta);
+}
+
+.formulario :focus-visible {
+  outline-color: var(--cinta-azul);
+}
+
+.formulario h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+.formulario-ayuda {
+  margin-bottom: 1.25rem;
+  font-size: 1rem;
+}
+
+.campo {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  border: 0;
+}
+
+.campo label,
+.campo legend {
+  display: block;
+  margin-bottom: 0.3rem;
+  padding: 0;
+  font-weight: 700;
+}
+
+.campo input[type="text"],
+.campo input[type="tel"] {
+  width: 100%;
+  min-height: 48px;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--tinta);
+  border-radius: 4px;
+  background: var(--blanco);
+  color: var(--tinta);
+  font: inherit;
+}
+
+.campo input[aria-invalid="true"] {
+  border-width: 3px;
+}
+
+.opciones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+}
+
+.opciones label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  margin: 0;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.opciones input {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin: 0;
+  accent-color: var(--cinta-azul);
+}
+
+.error {
+  margin-top: 0.3rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.error::before {
+  content: "⚠ ";
+}
+
+.enviado:not(:empty) {
+  margin-top: 1rem;
+  padding: 0.6rem 0.75rem;
+  border-left: 6px solid var(--cinta-azul);
+  background: var(--blanco);
+  font-weight: 700;
+}
+
+.pequeno {
+  margin-top: 1rem;
+  font-size: 1rem;
+}
+
+/* ==========================================================
+   Pie y barra del móvil
+   ========================================================== */
+.pie {
+  padding-block: 2rem 7rem; /* el 7rem deja sitio a la barra del móvil */
+  font-size: 1rem;
+}
+
+.pie p + p {
+  margin-top: 0.5rem;
+}
+
+/* FLEX: flex: 1 reparte el ancho a partes iguales entre los dos botones */
+.barra-movil {
+  position: fixed;
+  inset: auto 0 0;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem var(--margen) calc(0.5rem + env(safe-area-inset-bottom));
+  background: var(--tinta);
+}
+
+.barra-movil .boton {
+  flex: 1;
+}
+
+.barra-movil .boton {
+  border-color: var(--blanco);
+}
+
+/* Sobre fondo oscuro, el foco azul casi no se vería */
+.barra-movil :focus-visible {
+  outline-color: var(--blanco);
+}
+
+/* ==========================================================
+   Pantallas medianas y grandes
+   ========================================================== */
+@media (min-width: 768px) {
+  html {
+    scroll-padding-bottom: 0;
+  }
+
+  .cabecera-tel {
+    display: inline;
+    font-size: 1rem;
+  }
+
+  .barra-movil {
+    display: none;
+  }
+
+  .pie {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .pie p + p {
+    margin-top: 0;
+  }
+
+  .pasos {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .persona {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: center;
+    gap: 3rem;
+  }
+
+  .persona .hueco-foto {
+    order: 0;
+  }
+
+  .contacto-rejilla {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 3rem;
+  }
+}
+
+/* Dos columnas en la portada: título y texto a la izquierda, mapa a la derecha */
+@media (min-width: 900px) {
+  .portada {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "titulo mapa"
+      "texto  mapa";
+    column-gap: 3rem;
+    row-gap: 2rem;
+  }
+}
+
+/* En el modo de alto contraste de Windows, la zona elegida se sigue distinguiendo */
+@media (forced-colors: active) {
+  .zona-boton[aria-pressed="true"] {
+    forced-color-adjust: none;
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* Si la persona pide menos movimiento, la cinta aparece sin animación */
+@media (prefers-reduced-motion: reduce) {
+  .cinta path {
+    transition: none;
+  }
+}

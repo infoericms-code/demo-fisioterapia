@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contrapeso, fisioterapia en el Clot (web de demostración)</title>
+  <meta name="description" content="Web de demostración de una consulta de fisioterapia inventada en el barrio del Clot, en Barcelona.">
+  <!-- noindex: pide a Google que no la muestre, porque el negocio es inventado. Quítalo en la web de un cliente real. -->
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#17263A">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Contrapeso, fisioterapia en el Clot (demo)">
+  <meta property="og:description" content="Web de demostración de una consulta de fisioterapia inventada.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;700;800&display=swap">
+  <link rel="stylesheet" href="styles.css">
+  <!-- Avisa al CSS de que hay JavaScript. Sin él, los textos de todas las zonas se ven en lista. -->
+  <script>document.documentElement.classList.add('js');</script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <p class="aviso">Web de demostración. Contrapeso es un negocio inventado y aquí no se pueden pedir citas.</p>
+
+  <header class="cabecera contenedor">
+    <a class="marca" href="#contenido">Contrapeso</a>
+    <div class="cabecera-acciones">
+      <!-- EDITA AQUÍ: teléfono (en el texto y en el enlace tel:) -->
+      <a class="cabecera-tel" href="tel:+34000000000"><mark class="edita">EDITA AQUÍ: teléfono</mark></a>
+      <a class="boton" href="#contacto">Pedir cita</a>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- PORTADA: título, mapa del cuerpo y texto de la zona elegida -->
+    <section class="portada contenedor">
+      <div class="portada-titulo">
+        <h1>¿Dónde te duele?</h1>
+        <p class="entrada">Toca la zona y te cuento cómo la trabajo. Fisioterapia en el Clot, con la misma persona de principio a fin.</p>
+      </div>
+
+      <div class="mapa" role="group" aria-label="Elige una zona del cuerpo">
+        <!-- El muñeco es solo un dibujo; las zonas de verdad son los botones de debajo -->
+        <svg class="muneco" viewBox="0 0 520 600" aria-hidden="true" focusable="false">
+          <g class="pieza">
+            <ellipse cx="260" cy="58" rx="30" ry="36"/>
+            <path d="M208 132 Q260 120 312 132 Q326 138 322 170 L302 272 Q260 284 218 272 L198 170 Q194 138 208 132Z"/>
+            <path d="M220 282 Q260 294 300 282 L308 328 Q260 346 212 328Z"/>
+            <ellipse cx="155" cy="372" rx="11" ry="18"/>
+            <ellipse cx="365" cy="372" rx="11" ry="18"/>
+            <ellipse cx="213" cy="580" rx="18" ry="9"/>
+            <ellipse cx="307" cy="580" rx="18" ry="9"/>
+          </g>
+          <g class="hueso">
+            <line x1="260" y1="92" x2="260" y2="122" stroke-width="22"/>
+            <line x1="186" y1="170" x2="172" y2="250" stroke-width="26"/>
+            <line x1="168" y1="276" x2="158" y2="348" stroke-width="22"/>
+            <line x1="334" y1="170" x2="348" y2="250" stroke-width="26"/>
+            <line x1="352" y1="276" x2="362" y2="348" stroke-width="22"/>
+            <line x1="230" y1="362" x2="224" y2="450" stroke-width="36"/>
+            <line x1="222" y1="488" x2="218" y2="552" stroke-width="26"/>
+            <line x1="290" y1="362" x2="296" y2="450" stroke-width="36"/>
+            <line x1="298" y1="488" x2="302" y2="552" stroke-width="26"/>
+          </g>
+          <g class="articulacion">
+            <circle cx="190" cy="146" r="18"/>
+            <circle cx="330" cy="146" r="18"/>
+            <circle cx="170" cy="262" r="12"/>
+            <circle cx="350" cy="262" r="12"/>
+            <circle cx="232" cy="344" r="16"/>
+            <circle cx="288" cy="344" r="16"/>
+            <circle cx="223" cy="470" r="16"/>
+            <circle cx="297" cy="470" r="16"/>
+            <circle cx="217" cy="566" r="9"/>
+            <circle cx="303" cy="566" r="9"/>
+          </g>
+
+          <!-- Líneas que unen cada botón con su zona, como en una lámina de anatomía -->
+          <g class="guia">
+            <path d="M520 100 L272 106"/><circle cx="272" cy="106" r="4"/>
+            <path d="M0 146 L178 146"/><circle cx="178" cy="146" r="4"/>
+            <path d="M520 250 L290 250"/><circle cx="290" cy="250" r="4"/>
+            <path d="M0 470 L212 470"/><circle cx="212" cy="470" r="4"/>
+            <path d="M520 566 L312 566"/><circle cx="312" cy="566" r="4"/>
+          </g>
+
+          <!-- La cinta de cada zona. pathLength="1" permite animarla como si se pegara -->
+          <g class="cinta" data-zona="cuello">
+            <path pathLength="1" d="M248 136 L254 96"/>
+            <path pathLength="1" d="M272 136 L266 96"/>
+          </g>
+          <g class="cinta" data-zona="hombro">
+            <path pathLength="1" d="M168 176 Q164 136 198 124"/>
+            <path pathLength="1" d="M186 184 Q184 148 216 140"/>
+          </g>
+          <g class="cinta activa" data-zona="espalda">
+            <path pathLength="1" d="M230 214 L290 276"/>
+            <path pathLength="1" d="M290 214 L230 276"/>
+          </g>
+          <g class="cinta" data-zona="rodilla">
+            <path pathLength="1" d="M210 444 Q196 470 210 498"/>
+            <path pathLength="1" d="M236 444 Q250 470 236 498"/>
+          </g>
+          <g class="cinta" data-zona="tobillo">
+            <path pathLength="1" d="M288 544 Q302 584 318 544"/>
+            <path pathLength="1" d="M288 558 L318 558"/>
+          </g>
+        </svg>
+
+        <button class="zona-boton z-cuello" type="button" data-zona="cuello" aria-pressed="false">Cuello</button>
+        <button class="zona-boton z-hombro" type="button" data-zona="hombro" aria-pressed="false">Hombro</button>
+        <button class="zona-boton z-espalda" type="button" data-zona="espalda" aria-pressed="true">Espalda baja</button>
+        <button class="zona-boton z-rodilla" type="button" data-zona="rodilla" aria-pressed="false">Rodilla</button>
+        <button class="zona-boton z-tobillo" type="button" data-zona="tobillo" aria-pressed="false">Tobillo</button>
+        <button class="zona-boton z-duda" type="button" data-zona="duda" aria-pressed="false">No lo tengo claro</button>
+      </div>
+
+      <div class="portada-texto">
+        <!-- aria-live: los lectores de pantalla leen el texto cuando cambia -->
+        <div class="zonas" aria-live="polite" aria-atomic="true">
+          <div class="zona" data-zona="cuello">
+            <h2>Cuello</h2>
+            <p>Suele venir de muchas horas de pantalla o de dormir mal. Lo trabajo con las manos y te enseño ejercicios que puedes hacer en el trabajo.</p>
+          </div>
+          <div class="zona" data-zona="hombro">
+            <h2>Hombro</h2>
+            <p>Cuesta subir el brazo o molesta al dormir de ese lado. Buscamos qué movimiento falla y lo recuperamos poco a poco.</p>
+          </div>
+          <div class="zona activa" data-zona="espalda">
+            <h2>Espalda baja</h2>
+            <p>Molesta al levantarte o tras un rato sentado. Primero bajamos el dolor y luego fortalecemos para que no vuelva tan fácilmente.</p>
+          </div>
+          <div class="zona" data-zona="rodilla">
+            <h2>Rodilla</h2>
+            <p>Al subir escaleras, al correr o después de una operación. Ajustamos el ejercicio a lo que quieres volver a hacer.</p>
+          </div>
+          <div class="zona" data-zona="tobillo">
+            <h2>Tobillo</h2>
+            <p>Un esguince mal curado vuelve a dar guerra. Recuperamos la fuerza y el equilibrio.</p>
+          </div>
+          <div class="zona" data-zona="duda">
+            <h2>No lo tengo claro</h2>
+            <p>No pasa nada. Llámame, me lo cuentas y te digo si puedo ayudarte.</p>
+          </div>
+        </div>
+        <p class="nota">Esto no es un diagnóstico: eso lo vemos en la consulta.</p>
+        <a class="boton" href="#contacto">Pedir cita</a>
+      </div>
+    </section>
+
+    <!-- TRATAMIENTOS Y PRECIOS -->
+    <section class="bloque contenedor" id="tratamientos">
+      <h2>Tratamientos y precios</h2>
+      <p>Precios de ejemplo.</p>
+      <ul class="tarifas">
+        <li>
+          <div>
+            <h3>Primera visita</h3>
+            <p>Valoración y primer tratamiento.</p>
+          </div>
+          <span class="tarifa-tiempo">60 min</span>
+          <span class="tarifa-precio">55 €</span>
+        </li>
+        <li>
+          <div>
+            <h3>Sesión de seguimiento</h3>
+            <p>Terapia manual y ejercicio.</p>
+          </div>
+          <span class="tarifa-tiempo">45 min</span>
+          <span class="tarifa-precio">45 €</span>
+        </li>
+        <li>
+          <div>
+            <h3>Rehabilitación tras una lesión u operación</h3>
+            <p>Plan por fases.</p>
+          </div>
+          <span class="tarifa-tiempo">45 min</span>
+          <span class="tarifa-precio">45 €</span>
+        </li>
+        <li>
+          <div>
+            <h3>Bono de 5 sesiones</h3>
+            <p>Cinco sesiones de seguimiento.</p>
+          </div>
+          <span class="tarifa-tiempo"></span>
+          <span class="tarifa-precio">200 €</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- PRIMERA VISITA: lleva números porque es un orden real -->
+    <section class="bloque contenedor" id="primera-visita">
+      <h2>Tu primera visita</h2>
+      <ol class="pasos">
+        <li>
+          <h3>Me cuentas qué te pasa</h3>
+          <p>Desde cuándo, qué lo empeora y qué quieres volver a hacer.</p>
+        </li>
+        <li>
+          <h3>Te exploro y te explico qué veo</h3>
+          <p>En palabras normales.</p>
+        </li>
+        <li>
+          <h3>Empezamos y te llevas un plan</h3>
+          <p>Primer tratamiento, ejercicios y cuántas sesiones calculo. Si creo que debe verte un médico, te lo digo.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- QUIÉN TE ATIENDE -->
+    <section class="bloque contenedor persona" id="quien">
+      <!-- EDITA AQUÍ: cambia este hueco por una foto real, con su texto alternativo -->
+      <div class="hueco hueco-foto"><mark class="edita">EDITA AQUÍ: foto</mark></div>
+      <div>
+        <h2>Quién te atiende</h2>
+        <!-- EDITA AQUÍ: nombre y número de colegiación -->
+        <p>Soy <mark class="edita">EDITA AQUÍ: nombre</mark>, fisioterapeuta con n.º de colegiación <mark class="edita">EDITA AQUÍ</mark>.</p>
+        <p>Aquí no hay cambios de fisio: quien te valora es quien te trata.</p>
+        <!-- EDITA AQUÍ: reseñas reales y con permiso de quien las escribe; nunca inventadas -->
+        <p><mark class="edita">EDITA AQUÍ: reseñas reales de pacientes</mark></p>
+      </div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES: details y summary abren y cierran sin JavaScript -->
+    <section class="bloque contenedor" id="preguntas">
+      <h2>Preguntas frecuentes</h2>
+      <div class="preguntas">
+        <details>
+          <summary>¿Necesito que me mande un médico?</summary>
+          <!-- EDITA AQUÍ: confirma esta respuesta con cada cliente real -->
+          <p>No, puedes venir directamente. Si tienes informes o pruebas, tráelos.</p>
+        </details>
+        <details>
+          <summary>¿Trabajas con mutuas?</summary>
+          <!-- EDITA AQUÍ: mutuas con las que trabaja -->
+          <p><mark class="edita">EDITA AQUÍ: mutuas</mark></p>
+        </details>
+        <details>
+          <summary>¿Qué me pongo?</summary>
+          <p>Ropa cómoda que deje a la vista la zona que molesta.</p>
+        </details>
+        <details>
+          <summary>¿Y si no puedo venir?</summary>
+          <p>Avísame con 24 horas y buscamos otro día.</p>
+        </details>
+      </div>
+    </section>
+
+    <!-- CONTACTO: el objetivo de toda la página -->
+    <section class="contacto" id="contacto">
+      <div class="contenedor contacto-rejilla">
+        <div class="contacto-datos">
+          <h2>Pide cita</h2>
+          <p>Llámame, escríbeme por WhatsApp o déjame tu teléfono y te llamo yo.</p>
+          <dl>
+            <!-- EDITA AQUÍ: teléfono (en el texto y en el enlace tel:) -->
+            <dt>Teléfono</dt>
+            <dd><a href="tel:+34000000000"><mark class="edita">EDITA AQUÍ: teléfono</mark></a></dd>
+            <!-- EDITA AQUÍ: WhatsApp (en el texto y en el enlace wa.me, sin el +) -->
+            <dt>WhatsApp</dt>
+            <dd><a href="https://wa.me/34000000000"><mark class="edita">EDITA AQUÍ: WhatsApp</mark></a></dd>
+            <!-- EDITA AQUÍ: correo (en el texto y en el enlace mailto:) -->
+            <dt>Correo</dt>
+            <dd><a href="mailto:EDITA-AQUI@example.com"><mark class="edita">EDITA AQUÍ: correo</mark></a></dd>
+            <!-- EDITA AQUÍ: dirección -->
+            <dt>Dirección</dt>
+            <dd><mark class="edita">EDITA AQUÍ: calle y número</mark><br>Barrio del Clot, Barcelona</dd>
+            <!-- EDITA AQUÍ: paradas cercanas -->
+            <dt>Cómo llegar</dt>
+            <dd><mark class="edita">EDITA AQUÍ: metro y bus</mark></dd>
+            <!-- EDITA AQUÍ: horario -->
+            <dt>Horario</dt>
+            <dd><mark class="edita">EDITA AQUÍ: horario</mark></dd>
+          </dl>
+          <!-- EDITA AQUÍ: cambia este hueco por el mapa de Google Maps del local -->
+          <div class="hueco hueco-mapa"><mark class="edita">EDITA AQUÍ: mapa</mark></div>
+        </div>
+
+        <!-- El botón empieza desactivado y script.js lo activa: sin JavaScript no hay nada que lo reciba -->
+        <form class="formulario" id="formulario" novalidate>
+          <h3>Déjame tu teléfono</h3>
+          <p class="formulario-ayuda">Nombre y teléfono son obligatorios.</p>
+          <div class="campo">
+            <label for="nombre">Nombre</label>
+            <input id="nombre" name="nombre" type="text" autocomplete="name" required>
+            <p class="error" id="nombre-error" hidden>Escribe tu nombre.</p>
+          </div>
+          <div class="campo">
+            <label for="telefono">Teléfono</label>
+            <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required>
+            <p class="error" id="telefono-error" hidden>Escribe un teléfono de 9 a 15 cifras para poder llamarte.</p>
+          </div>
+          <fieldset class="campo">
+            <legend>¿Cuándo te va mejor? (opcional)</legend>
+            <div class="opciones">
+              <label><input type="radio" name="franja" value="mañana"> Por la mañana</label>
+              <label><input type="radio" name="franja" value="tarde"> Por la tarde</label>
+            </div>
+          </fieldset>
+          <button class="boton" type="submit" disabled>Pedir que me llamen</button>
+          <p class="enviado" id="enviado" role="status"></p>
+          <!-- EDITA AQUÍ: enlace a la política de privacidad -->
+          <p class="pequeno">Solo uso tu teléfono para llamarte. Privacidad: <mark class="edita">EDITA AQUÍ</mark></p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie contenedor">
+    <p>Contrapeso es un negocio inventado.</p>
+    <!-- EDITA AQUÍ: enlaces a los textos legales -->
+    <p>Aviso legal: <mark class="edita">EDITA AQUÍ</mark>. Privacidad: <mark class="edita">EDITA AQUÍ</mark>.</p>
+    <p>Demo hecha por <a href="https://infoericms-code.github.io/">Eric</a></p>
+  </footer>
+
+  <!-- Barra fija del móvil: llamar o escribir en dos segundos. EDITA AQUÍ: teléfono y WhatsApp -->
+  <nav class="barra-movil" aria-label="Contacto rápido">
+    <a class="boton" href="tel:+34000000000">Llamar</a>
+    <a class="boton boton-claro" href="https://wa.me/34000000000">WhatsApp</a>
+  </nav>
+</body>
+</html>
